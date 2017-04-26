@@ -1,7 +1,7 @@
 {
   "name": "bitcoin-txdecoder",
   "version": "0.0.1",
-  "description": "decode hex string to json",
+  "description": "transaction decode hex string",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,7 +15,8 @@
   },
   "keywords": [
     "bitcoin",
-    "hexstring"
+    "transaction",
+    "rawtx"
   ],
   "author": "you21979",
   "license": "MIT",
