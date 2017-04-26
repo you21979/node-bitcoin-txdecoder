@@ -1,2 +1,10 @@
 # node-bitcoin-txdecoder
-decode hex string to json
+
+```
+npm i bitcoin-txdecoder
+```
+
+## usage
+
+see example
+
