@@ -11,15 +11,14 @@ var decodeFormat = function(tx){
 }
 
 var decodeInput = function(tx){
-    var result = [];
-    tx.ins.forEach(function(input, n){
+    var result = tx.ins.map(function(input, n){
         var vin = {
             txid: input.hash.reverse().toString('hex'),
             n : input.index,
             script: bitcoin.script.toASM(input.script),
             sequence: input.sequence,
         }
-        result.push(vin);
+        return vin
     })
     return result
 }
@@ -43,13 +42,22 @@ var decodeOutput = function(tx, network){
         case 'scripthash':
             vout.scriptPubKey.addresses.push(bitcoin.address.fromOutputScript(out.script, network));
             break;
+        case 'witnesspubkeyhash': // NATIVE SEGWIT
+            break;
+        case 'pubkey': // There really is no address
+            var pubKeyBuffer = bitcoin.script.pubKey.output.decode(out.script);
+            vout.scriptPubKey.addresses.push(bitcoin.ECPair.fromPublicKeyBuffer(pubKeyBuffer, network).getAddress());
+            break;
+        case 'nulldata': // OP_RETURN
+            break;
+        default :
+            break;
         }
         return vout
     }
 
-    var result = [];
-    tx.outs.forEach(function(out, n){
-        result.push(format(out, n, network));
+    var result = tx.outs.map(function(out, n){
+        return format(out, n, network);
     })
     return result
 }

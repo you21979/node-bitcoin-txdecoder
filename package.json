@@ -1,6 +1,6 @@
 {
   "name": "bitcoin-txdecoder",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "transaction decode hex string",
   "main": "index.js",
   "scripts": {
