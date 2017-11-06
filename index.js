@@ -6,6 +6,8 @@ var decodeFormat = function(tx){
         txid: tx.getId(),
         version: tx.version,
         locktime: tx.locktime,
+        size: tx.byteLength(),
+        vsize: tx.virtualSize(),
     };
     return result;
 }
