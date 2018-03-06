@@ -18,6 +18,7 @@ var decodeInput = function(tx){
             txid: input.hash.reverse().toString('hex'),
             n : input.index,
             script: bitcoin.script.toASM(input.script),
+            witness: bitcoin.script.toASM(input.witness),
             sequence: input.sequence,
         }
         return vin
@@ -45,6 +46,7 @@ var decodeOutput = function(tx, network){
             vout.scriptPubKey.addresses.push(bitcoin.address.fromOutputScript(out.script, network));
             break;
         case 'witnesspubkeyhash': // NATIVE SEGWIT
+            vout.scriptPubKey.addresses.push(bitcoin.address.fromOutputScript(out.script, network));
             break;
         case 'pubkey': // There really is no address
             var pubKeyBuffer = bitcoin.script.pubKey.output.decode(out.script);
